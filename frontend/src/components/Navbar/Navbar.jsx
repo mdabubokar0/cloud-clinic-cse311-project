@@ -13,7 +13,7 @@ export const Navbar = () => {
         <li>About</li>
         <li>Contact</li>
       </ul>
-      <Link to="/getstarted" className='w-[160px] h-[48px] bg-[#009BA9] cursor-pointer rounded-lg flex items-center justify-center text-white'>Get Started</Link>
+      <Link to="/login" className='w-[160px] h-[48px] bg-[#009BA9] cursor-pointer rounded-lg flex items-center justify-center text-white'>Get Started</Link>
     </div>
   )
 }

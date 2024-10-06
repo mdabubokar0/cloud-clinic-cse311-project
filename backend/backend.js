@@ -13,6 +13,18 @@ const db = mysql.createConnection({
     database: "sccdb"
 })
 
+app.get("/", (req, res) => {
+    res.json("Dash")
+})
+
+app.get("/doctors", (req, res) => {
+    const q = "SELECT * FROM doctor_details";
+    db.query(q, (err, data) => {
+        if(err) return res.json("Error")
+        return res.json(data)
+    })
+})
+
 app.listen(8081, () => {
     console.log("Listening")
 })
