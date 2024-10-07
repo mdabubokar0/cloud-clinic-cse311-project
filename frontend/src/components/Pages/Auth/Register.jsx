@@ -1,25 +1,58 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export const Register = () => {
   const [role, setRole] = useState("");
+  const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone_no: "",
+    gender: "",
+    address: "",
+    specialization: "",
+    password: "",
+  });
+  const navigate = useNavigate()
 
   const handleRole = (e) => {
     setRole(e.target.value);
   };
 
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+
+    axios
+      .post("http://localhost:8081/login", formData)
+      .then((res) => {
+        console.log("Account created succesfully")
+        navigate("/dashboard")
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
-    <div className="flex h-full">
+    <div className="flex h-[100vh]">
       <div className="w-[50vw] h-full p-10 flex items-center justify-center">
         <div className="w-full">
           <h1 className="text-center text-[#009BA9] text-[50px] font-bold">
             Register
           </h1>
-          <form className="flex flex-col gap-3">
+          <form className="flex flex-col gap-3" onSubmit={handleRegister}>
             <div className="flex items-center gap-5">
               <div className="flex flex-col gap-1 text-[#009BA9] text-[16px] w-full">
                 <label htmlFor="first_name">First Name</label>
                 <input
+                  onChange={handleChange}
+                  value={formData.first_name}
                   className="p-3 w-full h-[48px] rounded-[8px] bg-[#FAFAFA] border-l-[1px] border-l-[#009BA9] border-b-[1px] border-b-[#009BA9] focus:outline-none"
                   type="text"
                   placeholder="Enter Your First Name"
@@ -30,6 +63,8 @@ export const Register = () => {
               <div className="flex flex-col gap-1 text-[#009BA9] text-[16px] w-full">
                 <label htmlFor="last_name">Last Name</label>
                 <input
+                  onChange={handleChange}
+                  value={formData.last_name}
                   className="p-3 w-full h-[48px] rounded-[8px] bg-[#FAFAFA] border-l-[1px] border-l-[#009BA9] border-b-[1px] border-b-[#009BA9] focus:outline-none"
                   type="text"
                   placeholder="Enter Your Last Name"
@@ -42,6 +77,8 @@ export const Register = () => {
               <div className="flex flex-col gap-1 text-[#009BA9] text-[16px] w-full">
                 <label htmlFor="email">Email</label>
                 <input
+                  onChange={handleChange}
+                  value={formData.email}
                   className="p-3 w-full h-[48px] rounded-[8px] bg-[#FAFAFA] border-l-[1px] border-l-[#009BA9] border-b-[1px] border-b-[#009BA9] focus:outline-none"
                   type="email"
                   placeholder="Enter Your Email"
@@ -52,6 +89,8 @@ export const Register = () => {
               <div className="flex flex-col gap-1 text-[#009BA9] text-[16px] w-full">
                 <label htmlFor="phone_no">Phone No.</label>
                 <input
+                  onChange={handleChange}
+                  value={formData.phone_no}
                   className="p-3 w-full h-[48px] rounded-[8px] bg-[#FAFAFA] border-l-[1px] border-l-[#009BA9] border-b-[1px] border-b-[#009BA9] focus:outline-none"
                   type="number"
                   placeholder="Enter Your Phone No."
@@ -78,6 +117,8 @@ export const Register = () => {
               <div className="flex flex-col gap-1 text-[#009BA9] text-[16px] w-full">
                 <label htmlFor="address">Address</label>
                 <input
+                  onChange={handleChange}
+                  value={formData.address}
                   className="p-3 w-full h-[48px] rounded-[8px] bg-[#FAFAFA] border-l-[1px] border-l-[#009BA9] border-b-[1px] border-b-[#009BA9] focus:outline-none"
                   type="text"
                   placeholder="Enter Your Address"
@@ -128,6 +169,8 @@ export const Register = () => {
                   <div className="flex flex-col gap-1 text-[#009BA9] text-[16px] w-full">
                     <label htmlFor="dob">Date of Birth</label>
                     <input
+                      onChange={handleChange}
+                      value={formData.dob}
                       className="p-3 w-full h-[48px] rounded-[8px] bg-[#FAFAFA] border-l-[1px] border-l-[#009BA9] border-b-[1px] border-b-[#009BA9] focus:outline-none"
                       type="date"
                       placeholder="Enter Your Date of Birth"
@@ -137,6 +180,8 @@ export const Register = () => {
                   <div className="flex flex-col gap-1 text-[#009BA9] text-[16px] w-full">
                     <label htmlFor="occupation">Occupation</label>
                     <input
+                      onChange={handleChange}
+                      value={formData.occupation}
                       className="p-3 w-full h-[48px] rounded-[8px] bg-[#FAFAFA] border-l-[1px] border-l-[#009BA9] border-b-[1px] border-b-[#009BA9] focus:outline-none"
                       type="text"
                       placeholder="Enter Your Occupation"
@@ -148,6 +193,8 @@ export const Register = () => {
                   <div className="flex flex-col gap-1 text-[#009BA9] text-[16px] w-full">
                     <label htmlFor="height">Height</label>
                     <input
+                      onChange={handleChange}
+                      value={formData.height}
                       className="p-3 w-full h-[48px] rounded-[8px] bg-[#FAFAFA] border-l-[1px] border-l-[#009BA9] border-b-[1px] border-b-[#009BA9] focus:outline-none"
                       type="number"
                       placeholder="Enter Your Height"
@@ -157,6 +204,8 @@ export const Register = () => {
                   <div className="flex flex-col gap-1 text-[#009BA9] text-[16px] w-full">
                     <label htmlFor="weight">Weight</label>
                     <input
+                      onChange={handleChange}
+                      value={formData.weight}
                       className="p-3 w-full h-[48px] rounded-[8px] bg-[#FAFAFA] border-l-[1px] border-l-[#009BA9] border-b-[1px] border-b-[#009BA9] focus:outline-none"
                       type="number"
                       placeholder="Enter Your Weight"
@@ -166,6 +215,8 @@ export const Register = () => {
                   <div className="flex flex-col gap-1 text-[#009BA9] text-[16px] w-full">
                     <label htmlFor="bloodgroup">Blood Group</label>
                     <input
+                      onChange={handleChange}
+                      value={formData.blood_group}
                       className="p-3 w-full h-[48px] rounded-[8px] bg-[#FAFAFA] border-l-[1px] border-l-[#009BA9] border-b-[1px] border-b-[#009BA9] focus:outline-none"
                       type="text"
                       placeholder="Enter Your Blood Group"
@@ -177,6 +228,8 @@ export const Register = () => {
                   <div className="flex flex-col gap-1 text-[#009BA9] text-[16px] w-full">
                     <label htmlFor="guardian_name">Guardian Name</label>
                     <input
+                      onChange={handleChange}
+                      value={formData.guardian_name}
                       className="p-3 w-full h-[48px] rounded-[8px] bg-[#FAFAFA] border-l-[1px] border-l-[#009BA9] border-b-[1px] border-b-[#009BA9] focus:outline-none"
                       type="text"
                       placeholder="Enter Your Guardian Name"
@@ -186,6 +239,8 @@ export const Register = () => {
                   <div className="flex flex-col gap-1 text-[#009BA9] text-[16px] w-full">
                     <label htmlFor="guardian_no">Guardian No</label>
                     <input
+                      onChange={handleChange}
+                      value={formData.guardian_no}
                       className="p-3 w-full h-[48px] rounded-[8px] bg-[#FAFAFA] border-l-[1px] border-l-[#009BA9] border-b-[1px] border-b-[#009BA9] focus:outline-none"
                       type="text"
                       placeholder="Enter Your Guardian No"
@@ -198,6 +253,8 @@ export const Register = () => {
             <div className="flex flex-col gap-1 text-[#009BA9] text-[16px] w-full">
               <label htmlFor="password">Password</label>
               <input
+                onChange={handleChange}
+                value={formData.password}
                 className="p-3 w-full h-[48px] rounded-[8px] bg-[#FAFAFA] border-l-[1px] border-l-[#009BA9] border-b-[1px] border-b-[#009BA9] focus:outline-none"
                 type="password"
                 placeholder="Enter Your Password"
@@ -209,7 +266,7 @@ export const Register = () => {
                 type="submit"
                 className="mt-2 w-full h-[48px] bg-[#009BA9] flex items-center justify-center text-[16px] text-white font-bold rounded-lg"
               >
-                Sign Up
+                Register
               </button>
               <div className="mt-2 flex items-center justify-between">
                 <p>
