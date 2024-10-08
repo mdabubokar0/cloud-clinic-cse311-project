@@ -4,9 +4,10 @@ import axios from "axios";
 
 export const Login = () => {
   const [formData, setFormData] = useState({
-    user_id: "",
+    email: "",
     password: "",
   });
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -25,8 +26,15 @@ export const Login = () => {
         console.log("Login successful");
         navigate("/dashboard");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err.response && err.response.status === 401) {
+          setError("Invalid email or password");
+        } else {
+          console.log(err);
+        }
+      });
   };
+  
   return (
     <div className="flex h-[100vh]">
       <div className="w-[50vw] h-[100vh] bg-[#009BA9] flex items-center justify-center">
@@ -42,19 +50,24 @@ export const Login = () => {
           <h1 className="text-center text-[#009BA9] text-[50px] font-bold">
             Login
           </h1>
+          {error && (
+            <div className="bg-red-200 text-red-600 p-2 rounded mb-4">
+              {error}
+            </div>
+          )}
           <form className="flex flex-col gap-3" onSubmit={handleLogin}>
             <div className="flex flex-col gap-1 text-[#009BA9] text-[16px] w-full">
-              <label htmlFor="user_id">ID</label>
+              <label htmlFor="email">Email</label>
               <input
                 onChange={handleChange}
-                value={formData.user_id}
+                value={formData.email}
                 className="p-3 w-full h-[48px] rounded-[8px] bg-[#FAFAFA] border-l-[1px] border-l-[#009BA9] border-b-[1px] border-b-[#009BA9] focus:outline-none"
-                type="number"
+                type="email"
                 placeholder="Enter Your ID"
-                name="user_id"
+                name="email"
               />
             </div>
-            
+
             <div className="flex flex-col gap-1 text-[#009BA9] text-[16px] w-full">
               <label htmlFor="password">Password</label>
               <input

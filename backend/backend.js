@@ -12,22 +12,19 @@ const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "",
-  database: "sccdb",
+  database: "db",
 });
 
 app.post("/register", (req, res) => {
   const values = [
-    req.body.first_name,
-    req.body.last_name,
+    req.body.name,
     req.body.email,
     req.body.phone_no,
-    req.body.gender,
-    req.body.specialization,
     req.body.address,
     req.body.password,
   ];
 
-  const sql = "INSERT INTO user_details (`first_name`, `last_name`, `email`, `phone_no`, `gender`, `specialization`, `address`, `password`) VALUES(?)";
+  const sql = "INSERT INTO hospital (`name`, `email`, `phone_no`, `address`, `password`) VALUES(?)";
 
   db.query(sql, [values], (err, data) => {
     if (err) return res.json(err);
@@ -36,12 +33,26 @@ app.post("/register", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-  const values = [req.body.user_id, req.body.password];
+  const { email, password } = req.body;
 
-  const sql = "SELECT * FROM user_details WHERE user_id = ? AND password = ?";
-  db.query(sql, [values], (err, data) => {
-    if (err) return res.json("Login failed");
-    return res.json(data);
+  const sql = "SELECT * FROM hospital WHERE email = ?";
+
+  db.query(sql, [email], (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: "Database error" });
+    }
+
+    if (results.length === 0) {
+      return res.status(401).json({ error: "Invalid email or password" });
+    }
+
+    const user = results[0];
+
+    if (user.password !== password) {
+      return res.status(401).json({ error: "Invalid email or password" });
+    }
+
+    return res.status(200).json({ message: "Login successful", user });
   });
 });
 
