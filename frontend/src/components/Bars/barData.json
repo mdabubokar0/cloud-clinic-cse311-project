@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "title": "Dashboard",
+    "link": "/dashboard"
+  },
+  {
+    "id": 2,
+    "title": "Admins",
+    "link": "/admin"
+  },
+  {
+    "id": 3,
+    "title": "Doctors",
+    "link": "/doctor"
+  },
+  {
+    "id": 4,
+    "title": "Patients",
+    "link": "/patient"
+  },
+  {
+    "id": 5,
+    "title": "Nurses",
+    "link": "/nurse"
+  },
+  {
+    "id": 6,
+    "title": "Appointments",
+    "link": "/appointment"
+  },
+  {
+    "id": 7,
+    "title": "Departments",
+    "link": "/department"
+  }
+]
