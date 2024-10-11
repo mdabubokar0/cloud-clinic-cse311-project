@@ -4,8 +4,8 @@ import axios from "axios";
 
 export const Login = () => {
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    hos_email: "",
+    hos_password: "",
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -57,26 +57,26 @@ export const Login = () => {
           )}
           <form className="flex flex-col gap-3" onSubmit={handleLogin}>
             <div className="flex flex-col gap-1 text-[#009BA9] text-[16px] w-full">
-              <label htmlFor="email">Email</label>
+              <label htmlFor="hos_email">Email</label>
               <input
                 onChange={handleChange}
-                value={formData.email}
+                value={formData.hos_email}
                 className="p-3 w-full h-[48px] rounded-[8px] bg-[#FAFAFA] border-l-[1px] border-l-[#009BA9] border-b-[1px] border-b-[#009BA9] focus:outline-none"
                 type="email"
                 placeholder="Enter Your ID"
-                name="email"
+                name="hos_email"
               />
             </div>
 
             <div className="flex flex-col gap-1 text-[#009BA9] text-[16px] w-full">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="hos_password">Password</label>
               <input
                 onChange={handleChange}
-                value={formData.password}
+                value={formData.hos_password}
                 className="p-3 w-full h-[48px] rounded-[8px] bg-[#FAFAFA] border-l-[1px] border-l-[#009BA9] border-b-[1px] border-b-[#009BA9] focus:outline-none"
                 type="password"
                 placeholder="Enter Your Password"
-                name="password"
+                name="hos_password"
               />
             </div>
             <div>
