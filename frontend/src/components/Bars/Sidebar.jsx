@@ -1,19 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import bData from "./barData.json";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export const Sidebar = () => {
   const location = useLocation();
   const [active, setActive] = useState(location.pathname);
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    }
+  }, []);
 
   const handleActive = (link) => {
     setActive(link);
   };
 
+  const routes = bData.filter((b) => {
+    if(role === "Admin"){
+      return true;
+    } else if(role === "Patient") {
+      return b.title === "Dashboard" || b.title === "Doctor"
+    } else {
+      return b.title === "Dashboard" || b.title === "Appointments" || b.title === "Department";
+    }
+    return false;
+  })
+
   return (
     <div className="text-white w-[350px] h-[100vh] top-0 sticky bg-[#009BA9]">
       <h1 className="text-[40px] font-bold text-center mt-3">CC</h1>
-      {bData.map((b) => (
+      {routes.map((b) => (
         <div
           key={b.id}
           onClick={() => handleActive(b.link)}
