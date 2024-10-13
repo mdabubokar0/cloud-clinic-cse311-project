@@ -1,19 +1,56 @@
-Sage Care Center : Patient and treatment management in a Hospital.
+CSE311L Project
+Sec – 2, Summer 2024
 
-Project Scopes :
+Patient and treatment management in a Hospital: A system for managing patient information and treatment records in a hospital.
+Patient Registration: Manage patient details, including personal information and medical history.
+Treatment plans: Assign and update treatment plans for each patient.
+Doctor Appointments: Schedule and manage doctor appointments.
+Medical Records: Maintain detailed patient medical records, including prescriptions, test, and diagnoses.
+Billing System: generate bills based on treatments, tests and services provided.
+
+Project Guidelines
+
+Entities: strong entities, weak entities
+Relationships: 
+One-to-one
+One-to-Many/Many-to-One
+Many-to-Many
+Generalization/Specialization
+Role
+Ternary Relationship
+Composite, multivalued and derived attributes
+Weak entities
+primary key, foreign key and constraints(NOT NULL, UNIQUE)
+CRUD (create, read, update, delete) operations
 
 Entities and attributes :
-patient_details ( patient_id, first_name, last_name, email, phone_no, patient_guardian_name, patient_guardian_no, address, blood_group, dob, height, weight, gender, occupation )
+admin (id, name, email, password )
 
-doctor_details ( doctor_id, first_name, last_name, email, phone_no, address, password, specialization )
+patient_details ( id, name, email, phone_no, address, password, gender, blood_group, dob, height, weight, occupation, guardian_name, guardian_no )
 
-treatment_plan ( treatment_id, patient_id, doctor_id, treatment_desc, start_date, end_date )
+doctor_details ( id, name, email, phone_no, address, password, gender, speciality)
+
+treatment ( treatment_id, patient_id, treatment_name, treatment_cost )
 
 appointment ( appointment_id, patient_id, doctor_id, appointment_date, appointment_time )
 
 medical_record ( record_id, patient_id, treatment_id, test, prescription, diagnoses )
 
-bill ( bill_id, patient_id, total_amount, payment_method, payment_status )
+bill ( bill_id, patient_id, amount, status )
+
+department ( dept_id, dept_name )
+
+prescription( presc_id, patient_id, doctor_id )
+
+room ( room_id, cost )
+
+disease (disease_id, disease_name )
+
+service (service_id, service_name, service_cost )
+
+test (test_id, test_name, test_cost )
+
+insurance ( insurance_id, patient_id, provider_name )
 
 Relationships :
 	One to one

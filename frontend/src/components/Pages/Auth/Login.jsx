@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -9,13 +9,19 @@ export const Login = () => {
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
-
+  const token = localStorage.getItem("token");
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
+
+  useEffect(() => {
+    if (token) {
+      navigate("/dashboard");
+    }
+  }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -69,7 +75,6 @@ export const Login = () => {
                 name="email"
               />
             </div>
-
             <div className="flex flex-col gap-1 text-[#009BA9] text-[16px] w-full">
               <label htmlFor="password">Password</label>
               <input

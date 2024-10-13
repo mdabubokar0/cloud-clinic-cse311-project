@@ -6,31 +6,26 @@
   },
   {
     "id": 2,
-    "title": "Admins",
-    "link": "/admin"
-  },
-  {
-    "id": 3,
     "title": "Doctors",
     "link": "/doctor"
   },
   {
-    "id": 4,
+    "id": 3,
     "title": "Patients",
     "link": "/patient"
   },
   {
-    "id": 5,
+    "id": 4,
     "title": "Nurses",
     "link": "/nurse"
   },
   {
-    "id": 6,
+    "id": 5,
     "title": "Appointments",
     "link": "/appointment"
   },
   {
-    "id": 7,
+    "id": 6,
     "title": "Departments",
     "link": "/department"
   }

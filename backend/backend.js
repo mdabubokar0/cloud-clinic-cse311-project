@@ -55,48 +55,52 @@ app.post('/login', (req, res) => {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
 
-    // Assuming 'role' is part of the user object
     const token = jwt.sign({ userId: user.user_id, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
 
-    // Send the token and role to the frontend
     return res.status(200).json({
       message: 'Login successful',
       token,
-      role: user.role // Sending role in the response
+      role: user.role
     });
   });
 });
 
+app.get('/profile', (req, res) => {
+  const token = req.headers.authorization?.split(' ')[1];
 
-// Middleware to verify JWT
-const authenticateToken = (req, res, next) => {
-  const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
+  if (!token) {
+    return res.status(401).json({ error: 'Access denied, no token provided.' });
+  }
 
-  if (!token) return res.status(401).json({ error: "No token provided" });
-
-  jwt.verify(token, JWT_SECRET, (err, user) => {
-    if (err) return res.status(403).json({ error: "Invalid token" });
-
-    req.user = user; // Attach user info to request
-    next();
-  });
-};
-
-// Get logged-in user's role
-app.get("/api/user/role", authenticateToken, (req, res) => {
-  const { userId } = req.user; // Extract user ID from JWT
-
-  const query = `SELECT role FROM user_details WHERE user_id = ?`;
-
-  db.query(query, [userId], (err, result) => {
-    if (err) return res.status(500).json({ error: "Database query error" });
-
-    if (result.length > 0) {
-      return res.json({ role: result[0].role });
-    } else {
-      return res.status(404).json({ error: "User not found" });
+  jwt.verify(token, JWT_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(403).json({ error: 'Invalid token.' });
     }
+
+    const { userId } = decoded;
+
+    const sql = 'SELECT * FROM user_details WHERE user_id = ?';
+    db.query(sql, [userId], (err, results) => {
+      if (err) {
+        return res.status(500).json({ error: 'Database error' });
+      }
+
+      if (results.length === 0) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+
+      const user = results[0];
+
+      return res.status(200).json({
+        id: user.user_id,
+        name: user.name,
+        email: user.email,
+        phone_no: user.phone_no,
+        address: user.address,
+        gender: user.gender,
+        role: user.role,
+      });
+    });
   });
 });
 

@@ -3,13 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export const Register = () => {
-  const [role, setRole] = useState("");
   const [formData, setFormData] = useState({
-    hos_name: "",
-    hos_email: "",
-    hos_no: "",
-    hos_address: "",
-    hos_password: "",
+    name: "",
+    email: "",
+    phone_no: "",
+    address: "",
+    password: "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -61,61 +60,60 @@ export const Register = () => {
           )}
           <form className="flex flex-col gap-3" onSubmit={handleRegister}>
             <div className="flex flex-col gap-1 text-[#009BA9] text-[16px] w-full">
-              <label htmlFor="hos_name">Hospital Name</label>
+              <label htmlFor="name">Hospital Name</label>
               <input
                 onChange={handleChange}
-                value={formData.hos_name}
+                value={formData.name}
                 className="p-3 w-full h-[48px] rounded-[8px] bg-[#FAFAFA] border-l-[1px] border-l-[#009BA9] border-b-[1px] border-b-[#009BA9] focus:outline-none"
                 type="text"
                 placeholder="Enter Your Hospital Name"
-                name="hos_name"
+                name="name"
               />
             </div>
-            {/* More form fields */}
             <div className="flex items-center gap-5">
               <div className="flex flex-col gap-1 text-[#009BA9] text-[16px] w-full">
-                <label htmlFor="hos_email">Email</label>
+                <label htmlFor="email">Email</label>
                 <input
                   onChange={handleChange}
-                  value={formData.hos_email}
+                  value={formData.email}
                   className="p-3 w-full h-[48px] rounded-[8px] bg-[#FAFAFA] border-l-[1px] border-l-[#009BA9] border-b-[1px] border-b-[#009BA9] focus:outline-none"
                   type="email"
                   placeholder="Enter Your Email"
-                  name="hos_email"
+                  name="email"
                 />
               </div>
               <div className="flex flex-col gap-1 text-[#009BA9] text-[16px] w-full">
-                <label htmlFor="hos_no">Phone No.</label>
+                <label htmlFor="phone_no">Phone No.</label>
                 <input
                   onChange={handleChange}
-                  value={formData.hos_no}
+                  value={formData.phone_no}
                   className="p-3 w-full h-[48px] rounded-[8px] bg-[#FAFAFA] border-l-[1px] border-l-[#009BA9] border-b-[1px] border-b-[#009BA9] focus:outline-none"
                   type="number"
                   placeholder="Enter Your Phone No."
-                  name="hos_no"
+                  name="phone_no"
                 />
               </div>
             </div>
             <div className="flex flex-col gap-1 text-[#009BA9] text-[16px] w-full">
-              <label htmlFor="hos_address">Address</label>
+              <label htmlFor="address">Address</label>
               <input
                 onChange={handleChange}
-                value={formData.hos_address}
+                value={formData.address}
                 className="p-3 w-full h-[48px] rounded-[8px] bg-[#FAFAFA] border-l-[1px] border-l-[#009BA9] border-b-[1px] border-b-[#009BA9] focus:outline-none"
                 type="text"
                 placeholder="Enter Your Address"
-                name="hos_address"
+                name="address"
               />
             </div>
             <div className="flex flex-col gap-1 text-[#009BA9] text-[16px] w-full">
-              <label htmlFor="hos_password">Password</label>
+              <label htmlFor="password">Password</label>
               <input
                 onChange={handleChange}
-                value={formData.hos_password}
+                value={formData.password}
                 className="p-3 w-full h-[48px] rounded-[8px] bg-[#FAFAFA] border-l-[1px] border-l-[#009BA9] border-b-[1px] border-b-[#009BA9] focus:outline-none"
                 type="password"
                 placeholder="Enter Your Password"
-                name="hos_password"
+                name="password"
               />
             </div>
             <div>
@@ -147,7 +145,7 @@ export const Register = () => {
       <div className="w-full md:w-[50vw] h-auto bg-[#009BA9] flex items-center justify-center">
         <div>
           <h1 className="text-white text-[40px] font-bold text-center">
-            Welcome to SCC
+            Welcome
           </h1>
           <img src="img/doctor.png" alt="doctor" />
         </div>
